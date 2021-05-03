@@ -4,23 +4,23 @@ import org.springframework.format.Formatter;
 import org.springframework.stereotype.Component;
 
 import java.text.ParseException;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 @Component
-public class DateFormatter implements Formatter<LocalDate> {
+public class CustomDateTimeFormatter implements Formatter<LocalDateTime> {
 
-    private static final String DATE_FORMAT = "dd/MM/yyyy";
+    private static final String DATE_FORMAT = "dd/MM/yyyy hh:mm:ss a";
 
     @Override
-    public LocalDate parse(String text, Locale locale) throws ParseException {
+    public LocalDateTime parse(String text, Locale locale) throws ParseException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
-        return LocalDate.parse(text, formatter);
+        return LocalDateTime.parse(text, formatter);
     }
 
     @Override
-    public String print(LocalDate date, Locale locale) {
+    public String print(LocalDateTime date, Locale locale) {
         return date.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
     }
 }

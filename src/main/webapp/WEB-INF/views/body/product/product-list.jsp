@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <html>
@@ -31,7 +32,7 @@
             <th>Provider</th>
             <th>Category</th>
             <th>Buying Price</th>
-            <th>Salling Price</th>
+            <th>Selling Price</th>
             <th>Actions</th>
           </tr>
           </thead>
@@ -43,10 +44,11 @@
               <td>${product.model}</td>
               <td>${product.brand}</td>
               <td>${product.description}</td>
-              <td>${product.buyingPrice}</td>
-              <td>${product.sallingPrice}</td>
               <td>${product.provider.name}</td>
               <td>${product.category.name}</td>
+              <fmt:setLocale value="en_US"/>
+              <td class="text-success">$<fmt:formatNumber value="${product.buyingPrice}"/></td>
+              <td class="text-danger">$<fmt:formatNumber value="${product.sellingPrice}"/></td>
               <td class="text-center">
                 <form class="mb-0" action="${contextPath}/product/update-product" method="post">
                   <input type="hidden" name="id" value="${product.id}"/>

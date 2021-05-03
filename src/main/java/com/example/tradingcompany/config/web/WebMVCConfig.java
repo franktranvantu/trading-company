@@ -1,6 +1,6 @@
 package com.example.tradingcompany.config.web;
 
-import com.example.tradingcompany.formatter.DateFormatter;
+import com.example.tradingcompany.formatter.CustomDateTimeFormatter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
@@ -12,10 +12,10 @@ import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 @Configuration
 public class WebMVCConfig implements WebMvcConfigurer {
 
-    private final DateFormatter dateFormatter;
+    private final CustomDateTimeFormatter customDateTimeFormatter;
 
-    public WebMVCConfig(DateFormatter dateFormatter) {
-        this.dateFormatter = dateFormatter;
+    public WebMVCConfig(CustomDateTimeFormatter customDateTimeFormatter) {
+        this.customDateTimeFormatter = customDateTimeFormatter;
     }
 
     @Bean
@@ -34,6 +34,6 @@ public class WebMVCConfig implements WebMvcConfigurer {
 
     @Override
     public void addFormatters(FormatterRegistry registry) {
-        registry.addFormatter(dateFormatter);
+        registry.addFormatter(customDateTimeFormatter);
     }
 }

@@ -30,40 +30,20 @@ public class Product {
   @ManyToOne
   @JoinTable(
       name = "product_provider",
-      joinColumns = {@JoinColumn},
+      joinColumns = {@JoinColumn(name = "product_id")},
       inverseJoinColumns = {@JoinColumn}
   )
   private Provider provider;
   private String description;
-  @ManyToMany(fetch = FetchType.LAZY)
-  @JoinTable(
-      name = "product_order_details",
-      joinColumns = {@JoinColumn},
-      inverseJoinColumns = {@JoinColumn}
-  )
+  @ManyToMany(mappedBy = "products")
   private Set<OrderDetails> orderDetails = new HashSet<>();
   @ManyToOne
-  @JoinTable(
-      name = "product_category",
-      joinColumns = {@JoinColumn},
-      inverseJoinColumns = {@JoinColumn}
-  )
   private Category category;
   private Double buyingPrice;
   private Double sellingPrice;
   @ManyToMany
-  @JoinTable(
-      name = "product_delivery_notes",
-      joinColumns = {@JoinColumn},
-      inverseJoinColumns = {@JoinColumn}
-  )
   private Set<InventoryDeliveryNote> deliveryNotes = new HashSet<>();
   @ManyToMany
-  @JoinTable(
-      name = "product_receiving_notes",
-      joinColumns = {@JoinColumn},
-      inverseJoinColumns = {@JoinColumn}
-  )
   private Set<InventoryReceivingNote> receivingNotes = new HashSet<>();
 
   public Product(String name,

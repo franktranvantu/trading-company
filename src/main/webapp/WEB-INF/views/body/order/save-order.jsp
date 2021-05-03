@@ -57,7 +57,7 @@
         <div class="col-sm">
           <form:select path="type" class="form-control" id="type" aria-describedby="type">
             <option value="BUY" ${order.type == 'BUY' ? 'selected' : ''}>Buy</option>
-            <option value="SALE" ${order.type == 'BUY' ? 'selected' : ''}>Sale</option>
+            <option value="SALE" ${order.type == 'SALE' ? 'selected' : ''}>Sale</option>
           </form:select>
           <div id="type" class="invalid-feedback">
             Type is mandatory

@@ -62,6 +62,16 @@ public class OrderDetailsController {
         }
     }
 
+    @PostMapping("/update-order")
+    public String showUpdateOrder(@RequestParam long id, Model model) {
+        OrderDetails order = orderDetailsService.getOrderDetailsById(id);
+        model.addAttribute("action", "Update");
+        model.addAttribute("order", order);
+        model.addAttribute("staffs", staffService.getAllStaffs());
+        model.addAttribute("customers", customerService.getAllCustomers());
+        return "save-order";
+    }
+
     @PostMapping("/delete-order")
     public String deleteOrderDetails(@RequestParam long id, RedirectAttributes ra) {
         ResultDto result = new ResultDto();

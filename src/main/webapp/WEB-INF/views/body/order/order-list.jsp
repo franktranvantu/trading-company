@@ -1,4 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <html>
@@ -27,7 +29,7 @@
             <th>Date Time</th>
             <th>Staff</th>
             <th>Products</th>
-            <th>Customer</th>
+            <th>Provider/Customer</th>
             <th>Quantity</th>
             <th>Type</th>
             <th>Actions</th>
@@ -37,16 +39,27 @@
           <c:forEach var="order" items="${orders}">
             <tr>
               <td class="text-center">${order.id}</td>
-              <td>${order.dateTime}</td>
+              <td class="text-center"><spring:eval expression="order.dateTime"/></td>
               <td>${order.staff.name}</td>
               <td>
                 <c:forEach var="product" items="${order.products}">
-                  ${product}
+                  <div class="pt-1 pb-1">${product.name}</div>
                 </c:forEach>
               </td>
-              <td>${order.customer.name}</td>
+              <td>
+                  <c:choose>
+                    <c:when test="${order.type == 'BUY'}">
+                      <c:forEach var="product" items="${order.products}">
+                        <div class="pt-1 pb-1 text-success">${product.provider.name}</div>
+                      </c:forEach>
+                    </c:when>
+                    <c:when test="${order.type == 'SALE'}">
+                      <div class="pt-1 pb-1 text-danger">${order.customer.name}</div>
+                    </c:when>
+                  </c:choose>
+              </td>
               <td>${order.quantity}</td>
-              <td>${order.type}</td>
+              <td class="text-center"><span class="badge badge-${order.type == 'BUY' ? 'success' : 'danger'}">${order.type}</span></td>
               <td class="text-center">
                 <form class="mb-0" action="${contextPath}/order/update-order" method="post">
                   <input type="hidden" name="id" value="${order.id}"/>

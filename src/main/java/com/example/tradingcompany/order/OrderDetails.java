@@ -26,19 +26,14 @@ public class OrderDetails {
   private LocalDateTime dateTime = LocalDateTime.now();
   @ManyToOne
   @JoinTable(
-      name = "order_staff",
-      joinColumns = {@JoinColumn},
+      name = "order_details_staff",
+      joinColumns = {@JoinColumn(name = "order_details_id")},
       inverseJoinColumns = {@JoinColumn}
   )
   private Staff staff;
-  @ManyToMany(fetch = FetchType.LAZY, mappedBy = "orderDetails")
+  @ManyToMany
   private Set<Product> products = new HashSet<>();
   @ManyToOne
-  @JoinTable(
-      name = "order_customer",
-      joinColumns = {@JoinColumn},
-      inverseJoinColumns = {@JoinColumn}
-  )
   private Customer customer;
   private Integer quantity;
   private OrderType type;

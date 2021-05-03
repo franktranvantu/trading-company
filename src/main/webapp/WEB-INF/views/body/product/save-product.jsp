@@ -89,11 +89,11 @@
         </div>
       </div>
       <div class="form-group row">
-        <label for="sale" class="col-sm-3 col-form-label">Salling Price</label>
+        <label for="sale" class="col-sm-3 col-form-label">Selling Price</label>
         <div class="col-sm">
-          <form:input type="number" path="sallingPrice" class="form-control" id="sale" aria-describedby="sale"/>
+          <form:input type="number" path="sellingPrice" class="form-control" id="sale" aria-describedby="sale"/>
           <div id="sale" class="invalid-feedback">
-            Salling Price is mandatory
+            Selling Price is mandatory
           </div>
         </div>
       </div>

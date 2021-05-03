@@ -31,14 +31,14 @@ public class Staff {
   @OneToOne
   @JoinTable(
       name = "staff_delivery_note",
-      joinColumns = {@JoinColumn},
+      joinColumns = {@JoinColumn(name = "staff_id")},
       inverseJoinColumns = {@JoinColumn}
   )
   private InventoryDeliveryNote deliveryNote;
   @OneToOne
   @JoinTable(
       name = "staff_receiving_note",
-      joinColumns = {@JoinColumn},
+      joinColumns = {@JoinColumn(name = "staff_id")},
       inverseJoinColumns = {@JoinColumn}
   )
   private InventoryReceivingNote receivingNote;
