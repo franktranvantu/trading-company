@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+    <definition name="layout" template="/WEB-INF/views/layout/layout.jsp">
+        <put-attribute name="header" value="/WEB-INF/views/layout/header.jsp" />
+        <put-attribute name="body" value="" />
+        <put-attribute name="footer" value="/WEB-INF/views/layout/footer.jsp" />
+    </definition>
+
+    <definition name="order-list" extends="layout">
+        <put-attribute name="body" value="/WEB-INF/views/body/order/order-list.jsp" />
+        <put-attribute name="cssLink" value="order/order.css" />
+        <put-attribute name="jsLink" value="order/order-list.js" />
+    </definition>
+    <definition name="save-order" extends="layout">
+        <put-attribute name="body" value="/WEB-INF/views/body/order/save-order.jsp" />
+        <put-attribute name="cssLink" value="order/order.css" />
+        <put-attribute name="jsLink" value="order/save-order.js" />
+    </definition>
+
+    <definition name="provider-list" extends="layout">
+        <put-attribute name="body" value="/WEB-INF/views/body/provider/provider-list.jsp" />
+        <put-attribute name="cssLink" value="provider/provider.css" />
+        <put-attribute name="jsLink" value="provider/provider-list.js" />
+    </definition>
+    <definition name="save-provider" extends="layout">
+        <put-attribute name="body" value="/WEB-INF/views/body/provider/save-provider.jsp" />
+        <put-attribute name="cssLink" value="provider/provider.css" />
+        <put-attribute name="jsLink" value="provider/save-provider.js" />
+    </definition>
+
+    <definition name="customer-list" extends="layout">
+        <put-attribute name="body" value="/WEB-INF/views/body/customer/customer-list.jsp" />
+        <put-attribute name="cssLink" value="customer/customer.css" />
+        <put-attribute name="jsLink" value="customer/customer-list.js" />
+    </definition>
+    <definition name="save-customer" extends="layout">
+        <put-attribute name="body" value="/WEB-INF/views/body/customer/save-customer.jsp" />
+        <put-attribute name="cssLink" value="customer/customer.css" />
+        <put-attribute name="jsLink" value="customer/save-customer.js" />
+    </definition>
+
+    <definition name="category-list" extends="layout">
+        <put-attribute name="body" value="/WEB-INF/views/body/category/category-list.jsp" />
+        <put-attribute name="cssLink" value="category/category.css" />
+        <put-attribute name="jsLink" value="category/category-list.js" />
+    </definition>
+    <definition name="save-category" extends="layout">
+        <put-attribute name="body" value="/WEB-INF/views/body/category/save-category.jsp" />
+        <put-attribute name="cssLink" value="category/category.css" />
+        <put-attribute name="jsLink" value="category/save-category.js" />
+    </definition>
+
+    <definition name="product-list" extends="layout">
+        <put-attribute name="body" value="/WEB-INF/views/body/product/product-list.jsp" />
+        <put-attribute name="cssLink" value="product/product.css" />
+        <put-attribute name="jsLink" value="product/product-list.js" />
+    </definition>
+    <definition name="save-product" extends="layout">
+        <put-attribute name="body" value="/WEB-INF/views/body/product/save-product.jsp" />
+        <put-attribute name="cssLink" value="product/product.css" />
+        <put-attribute name="jsLink" value="product/save-product.js" />
+    </definition>
+
+    <definition name="staff-list" extends="layout">
+        <put-attribute name="body" value="/WEB-INF/views/body/staff/staff-list.jsp" />
+        <put-attribute name="cssLink" value="staff/staff.css" />
+        <put-attribute name="jsLink" value="staff/staff-list.js" />
+    </definition>
+    <definition name="save-staff" extends="layout">
+        <put-attribute name="body" value="/WEB-INF/views/body/staff/save-staff.jsp" />
+        <put-attribute name="cssLink" value="staff/staff.css" />
+        <put-attribute name="jsLink" value="staff/save-staff.js" />
+    </definition>
+</tiles-definitions>
