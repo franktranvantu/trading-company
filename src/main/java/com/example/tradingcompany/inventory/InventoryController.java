@@ -25,8 +25,11 @@ public class InventoryController {
     }
 
     @GetMapping
-    public String index(Model model) {
-        List<Inventory> inventories = inventoryService.getAllInventories();
+    public String index(@RequestParam(required = false) String name,
+                        @RequestParam(required = false) String address,
+                        @RequestParam(required = false) String product,
+                        Model model) {
+        List<Inventory> inventories = inventoryService.getAllInventories(name, address, product);
         model.addAttribute("inventories", inventories);
         return "inventory-list";
     }

@@ -24,6 +24,10 @@ public class ProductService {
     return productRepository.findById(id).orElse(null);
   }
 
+  public List<Product> getProductsLikeName(String name) {
+    return productRepository.findProductsLikeName(name);
+  }
+
   public Product createProduct(Product product) {
     return productRepository.save(product);
   }

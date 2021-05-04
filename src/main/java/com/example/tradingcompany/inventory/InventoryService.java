@@ -1,7 +1,10 @@
 package com.example.tradingcompany.inventory;
 
-import com.example.tradingcompany.inventory.Inventory;
+import com.example.tradingcompany.dto.SearchCriteria;
+import com.example.tradingcompany.product.ProductService;
+import com.google.common.collect.Sets;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,13 +15,22 @@ import java.util.Optional;
 public class InventoryService {
 
   private final InventoryRepository inventoryRepository;
+  private final ProductService productService;
 
-  public InventoryService(InventoryRepository inventoryRepository) {
+  public InventoryService(InventoryRepository inventoryRepository, ProductService productService) {
     this.inventoryRepository = inventoryRepository;
+    this.productService = productService;
   }
 
   public List<Inventory> getAllInventories() {
     return inventoryRepository.findAll();
+  }
+
+  public List<Inventory> getAllInventories(String name, String address, String product) {
+    InventorySpecification nameSpec = new InventorySpecification(new SearchCriteria("name", ":", name));
+    InventorySpecification addressSpec = new InventorySpecification(new SearchCriteria("address", ":", address));
+    InventorySpecification productSpec = new InventorySpecification(new SearchCriteria("products", ":", product));
+    return inventoryRepository.findAll(Specification.where(nameSpec).and(addressSpec).and(productSpec));
   }
 
   public Inventory getInventoryById(long id) {

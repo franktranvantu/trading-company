@@ -15,11 +15,43 @@
 
   <div class="container">
     <div class="card border-0">
-      <div class="card-header bg-transparent d-flex justify-content-between align-items-center">
-        <h4 class="card-title mb-0">All Inventories</h4>
-        <a href="${contextPath}/inventory/create-inventory" class="btn btn-primary"><i class="fas fa-user-plus"></i> Add new</a>
+      <div class="card-header bg-transparent">
+        <div class="mt-2 mb-4 d-flex">
+          <h4 class="card-title mb-0">Search inventory</h4>
+        </div>
+        <form action="${contextPath}/inventory" method="get">
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="name" class="form-label">Name</label>
+                <input type="input" name="name" class="form-control" id="name">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="address" class="form-label">Address</label>
+                <input type="input" name="address" class="form-control" id="address">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="product" class="form-label">Product</label>
+                <input type="input" name="product" class="form-control" id="product">
+              </div>
+            </div>
+            <div class="col-auto d-flex align-items-end justify-content-end">
+              <div class="form-group">
+                <button type="submit" class="btn btn-success"><i class="fas fa-search"></i> Search</button>
+              </div>
+            </div>
+          </div>
+        </form>
       </div>
       <div class="card-body">
+        <div class="mt-4 mb-4 d-flex justify-content-between align-items-center">
+          <h4 class="card-title mb-0">All Inventories</h4>
+          <a href="${contextPath}/inventory/create-inventory" class="btn btn-primary"><i class="fas fa-user-plus"></i> Add new</a>
+        </div>
         <table id="inventory" class="table">
           <thead class="thead-dark">
           <tr class="text-center">
