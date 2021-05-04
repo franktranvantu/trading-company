@@ -16,7 +16,7 @@
   </c:if>
 
   <div class="container">
-    <div class="card">
+    <div class="card border-0">
       <div class="card-header bg-transparent d-flex justify-content-between align-items-center">
         <h4 class="card-title mb-0">All Orders</h4>
         <a href="${contextPath}/order/create-order" class="btn btn-primary"><i class="fas fa-user-plus"></i> Add new</a>

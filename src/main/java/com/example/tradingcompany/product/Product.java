@@ -1,8 +1,7 @@
 package com.example.tradingcompany.product;
 
 import com.example.tradingcompany.category.Category;
-import com.example.tradingcompany.inventory.InventoryDeliveryNote;
-import com.example.tradingcompany.inventory.InventoryReceivingNote;
+import com.example.tradingcompany.inventory.Inventory;
 import com.example.tradingcompany.order.OrderDetails;
 import com.example.tradingcompany.provider.Provider;
 import lombok.AllArgsConstructor;
@@ -10,7 +9,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -41,10 +47,8 @@ public class Product {
   private Category category;
   private Double buyingPrice;
   private Double sellingPrice;
-  @ManyToMany
-  private Set<InventoryDeliveryNote> deliveryNotes = new HashSet<>();
-  @ManyToMany
-  private Set<InventoryReceivingNote> receivingNotes = new HashSet<>();
+  @ManyToMany(mappedBy = "products")
+  private Set<Inventory> inventories = new HashSet<>();
 
   public Product(String name,
                  String model,

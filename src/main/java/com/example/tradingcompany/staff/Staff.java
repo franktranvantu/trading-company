@@ -1,14 +1,16 @@
 package com.example.tradingcompany.staff;
 
-import com.example.tradingcompany.inventory.InventoryDeliveryNote;
-import com.example.tradingcompany.inventory.InventoryReceivingNote;
 import com.example.tradingcompany.order.OrderDetails;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -28,20 +30,6 @@ public class Staff {
   private String email;
   @OneToMany(mappedBy = "staff")
   private Set<OrderDetails> orderDetails = new HashSet<>();
-  @OneToOne
-  @JoinTable(
-      name = "staff_delivery_note",
-      joinColumns = {@JoinColumn(name = "staff_id")},
-      inverseJoinColumns = {@JoinColumn}
-  )
-  private InventoryDeliveryNote deliveryNote;
-  @OneToOne
-  @JoinTable(
-      name = "staff_receiving_note",
-      joinColumns = {@JoinColumn(name = "staff_id")},
-      inverseJoinColumns = {@JoinColumn}
-  )
-  private InventoryReceivingNote receivingNote;
 
   public Staff(String name, String address, String phone, String email) {
     this.name = name;

@@ -13,7 +13,7 @@
     </div>
   </c:if>
 
-  <div class="container">
+  <div class="container border-0">
     <div class="card">
       <div class="card-header bg-transparent d-flex justify-content-between align-items-center">
         <h4 class="card-title mb-0">All Customers</h4>

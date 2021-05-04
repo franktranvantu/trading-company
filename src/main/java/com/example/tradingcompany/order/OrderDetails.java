@@ -25,11 +25,6 @@ public class OrderDetails {
   private Long id;
   private LocalDateTime dateTime = LocalDateTime.now();
   @ManyToOne
-  @JoinTable(
-      name = "order_details_staff",
-      joinColumns = {@JoinColumn(name = "order_details_id")},
-      inverseJoinColumns = {@JoinColumn}
-  )
   private Staff staff;
   @ManyToMany
   private Set<Product> products = new HashSet<>();

@@ -74,4 +74,15 @@
         <put-attribute name="cssLink" value="staff/staff.css" />
         <put-attribute name="jsLink" value="staff/save-staff.js" />
     </definition>
+
+    <definition name="inventory-list" extends="layout">
+        <put-attribute name="body" value="/WEB-INF/views/body/inventory/inventory-list.jsp" />
+        <put-attribute name="cssLink" value="inventory/inventory.css" />
+        <put-attribute name="jsLink" value="inventory/inventory-list.js" />
+    </definition>
+    <definition name="save-inventory" extends="layout">
+        <put-attribute name="body" value="/WEB-INF/views/body/inventory/save-inventory.jsp" />
+        <put-attribute name="cssLink" value="inventory/inventory.css" />
+        <put-attribute name="jsLink" value="inventory/save-inventory.js" />
+    </definition>
 </tiles-definitions>

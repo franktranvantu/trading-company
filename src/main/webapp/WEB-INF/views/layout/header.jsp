@@ -24,6 +24,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="${contextPath}/staff">Staff</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="${contextPath}/inventory">Inventory</a>
+            </li>
         </ul>
     </div>
 </nav>

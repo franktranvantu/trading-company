@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Component
-@Order(6)
+@Order(7)
 public class OrderDetailsBootStrap implements CommandLineRunner {
 
   private final OrderDetailsRepository orderDetailsRepository;
