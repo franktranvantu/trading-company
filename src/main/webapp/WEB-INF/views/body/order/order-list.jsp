@@ -28,8 +28,9 @@
             <th>Id</th>
             <th>Date Time</th>
             <th>Staff</th>
-            <th>Products</th>
+            <th>Product</th>
             <th>Provider/Customer</th>
+            <th>Inventory</th>
             <th>Quantity</th>
             <th>Type</th>
             <th>Actions</th>
@@ -41,23 +42,18 @@
               <td class="text-center">${order.id}</td>
               <td class="text-center"><spring:eval expression="order.dateTime"/></td>
               <td>${order.staff.name}</td>
+              <td>${order.product.name}</td>
               <td>
-                <c:forEach var="product" items="${order.products}">
-                  <div class="pt-1 pb-1">${product.name}</div>
-                </c:forEach>
+                <c:choose>
+                  <c:when test="${order.type == 'BUY'}">
+                    <div class="text-success">${order.product.provider.name}</div>
+                  </c:when>
+                  <c:when test="${order.type == 'SALE'}">
+                    <div class="text-danger">${order.customer.name}</div>
+                  </c:when>
+                </c:choose>
               </td>
-              <td>
-                  <c:choose>
-                    <c:when test="${order.type == 'BUY'}">
-                      <c:forEach var="product" items="${order.products}">
-                        <div class="pt-1 pb-1 text-success">${product.provider.name}</div>
-                      </c:forEach>
-                    </c:when>
-                    <c:when test="${order.type == 'SALE'}">
-                      <div class="pt-1 pb-1 text-danger">${order.customer.name}</div>
-                    </c:when>
-                  </c:choose>
-              </td>
+              <td>${order.inventory.name}</td>
               <td>${order.quantity}</td>
               <td class="text-center"><span class="badge badge-${order.type == 'BUY' ? 'success' : 'danger'}">${order.type}</span></td>
               <td class="text-center">

@@ -31,6 +31,18 @@
         </div>
       </div>
       <div class="form-group row">
+        <label for="type" class="col-sm-3 col-form-label">Type</label>
+        <div class="col-sm">
+          <form:select path="type" class="form-control" id="type" aria-describedby="type">
+            <option value="BUY" ${order.type == 'BUY' ? 'selected' : ''}>Buy</option>
+            <option value="SALE" ${order.type == 'SALE' ? 'selected' : ''}>Sale</option>
+          </form:select>
+          <div id="type" class="invalid-feedback">
+            Type is mandatory
+          </div>
+        </div>
+      </div>
+      <div class="form-group row" id="customer-row">
         <label for="customer" class="col-sm-3 col-form-label">Customer</label>
         <div class="col-sm">
           <form:select path="customer" class="form-control" id="customer" aria-describedby="customer">
@@ -43,24 +55,51 @@
           </div>
         </div>
       </div>
+      <div class="form-group row" id="provider-row">
+        <label for="provider" class="col-sm-3 col-form-label">Provider</label>
+        <div class="col-sm">
+          <form:select path="product.provider" class="form-control" id="provider" aria-describedby="provider">
+            <c:forEach var="provider" items="${providers}">
+              <option value="${provider.id}" ${order.product.provider.id == provider.id ? 'selected' : ''}>${provider.name}</option>
+            </c:forEach>
+          </form:select>
+          <div id="provider" class="invalid-feedback">
+            Provider is mandatory
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="product" class="col-sm-3 col-form-label">Product</label>
+        <div class="col-sm">
+          <form:select path="product" class="form-control" id="product" aria-describedby="product">
+            <c:forEach var="product" items="${products}">
+              <option value="${product.id}" ${order.product.id == product.id ? 'selected' : ''}>${product.name}</option>
+            </c:forEach>
+          </form:select>
+          <div id="product" class="invalid-feedback">
+            Product is mandatory
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inventory" class="col-sm-3 col-form-label">Inventory</label>
+        <div class="col-sm">
+          <form:select path="inventory" class="form-control" id="inventory" aria-describedby="inventory">
+            <c:forEach var="inventory" items="${inventories}">
+              <option value="${inventory.id}" ${order.inventory.id == inventory.id ? 'selected' : ''}>${inventory.name}</option>
+            </c:forEach>
+          </form:select>
+          <div id="inventory" class="invalid-feedback">
+            Inventory is mandatory
+          </div>
+        </div>
+      </div>
       <div class="form-group row">
         <label for="quantity" class="col-sm-3 col-form-label">Quantity</label>
         <div class="col-sm">
           <form:input type="number" path="quantity" class="form-control" id="quantity" aria-describedby="quantity"/>
           <div id="quantity" class="invalid-feedback">
             Quantity is mandatory
-          </div>
-        </div>
-      </div>
-      <div class="form-group row">
-        <label for="type" class="col-sm-3 col-form-label">Type</label>
-        <div class="col-sm">
-          <form:select path="type" class="form-control" id="type" aria-describedby="type">
-            <option value="BUY" ${order.type == 'BUY' ? 'selected' : ''}>Buy</option>
-            <option value="SALE" ${order.type == 'SALE' ? 'selected' : ''}>Sale</option>
-          </form:select>
-          <div id="type" class="invalid-feedback">
-            Type is mandatory
           </div>
         </div>
       </div>

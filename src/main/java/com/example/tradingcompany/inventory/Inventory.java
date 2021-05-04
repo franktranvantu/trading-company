@@ -1,16 +1,13 @@
 package com.example.tradingcompany.inventory;
 
+import com.example.tradingcompany.order.OrderDetails;
 import com.example.tradingcompany.product.Product;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -28,6 +25,8 @@ public class Inventory {
   private String address;
   @ManyToMany
   private Set<Product> products = new HashSet<>();
+  @OneToMany(mappedBy = "inventory")
+  private Set<OrderDetails> orderDetails = new HashSet<>();
 
   public Inventory(String name, String address, Set<Product> products) {
     this.name = name;

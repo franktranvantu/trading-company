@@ -1,9 +1,9 @@
 package com.example.tradingcompany.order;
 
 import com.example.tradingcompany.customer.CustomerService;
+import com.example.tradingcompany.inventory.InventoryService;
 import com.example.tradingcompany.product.ProductService;
 import com.example.tradingcompany.staff.StaffService;
-import com.google.common.collect.Sets;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -21,12 +21,18 @@ public class OrderDetailsBootStrap implements CommandLineRunner {
   private final OrderDetailsRepository orderDetailsRepository;
   private final StaffService staffService;
   private final ProductService productService;
+  private final InventoryService inventoryService;
   private final CustomerService customerService;
 
-  public OrderDetailsBootStrap(OrderDetailsRepository orderDetailsRepository, StaffService staffService, ProductService productService, CustomerService customerService) {
+  public OrderDetailsBootStrap(OrderDetailsRepository orderDetailsRepository,
+                               StaffService staffService,
+                               ProductService productService,
+                               InventoryService inventoryService,
+                               CustomerService customerService) {
     this.orderDetailsRepository = orderDetailsRepository;
     this.staffService = staffService;
     this.productService = productService;
+    this.inventoryService = inventoryService;
     this.customerService = customerService;
   }
 
@@ -39,7 +45,8 @@ public class OrderDetailsBootStrap implements CommandLineRunner {
           return new OrderDetails(
               LocalDateTime.now(),
               staffService.getStaffById(randomId),
-              Sets.newHashSet(productService.getProductById(randomId), productService.getProductById(randomId+1), productService.getProductById(randomId+2)),
+              productService.getProductById(randomId),
+              inventoryService.getInventoryById(randomId),
               customerService.getCustomerById(randomId),
               10,
               (randomId % 2 == 0) ? OrderType.BUY : OrderType.SALE

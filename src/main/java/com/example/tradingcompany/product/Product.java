@@ -9,14 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -41,7 +34,7 @@ public class Product {
   )
   private Provider provider;
   private String description;
-  @ManyToMany(mappedBy = "products")
+  @OneToMany(mappedBy = "product")
   private Set<OrderDetails> orderDetails = new HashSet<>();
   @ManyToOne
   private Category category;
