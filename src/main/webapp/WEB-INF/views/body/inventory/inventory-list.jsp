@@ -58,7 +58,8 @@
             <th>Id</th>
             <th>Name</th>
             <th>Address</th>
-            <th>Products</th>
+            <th>Product</th>
+            <th>Quantity</th>
             <th>Actions</th>
           </tr>
           </thead>
@@ -69,8 +70,13 @@
               <td>${inventory.name}</td>
               <td>${inventory.address}</td>
               <td>
-                <c:forEach var="product" items="${inventory.products}">
-                  <div class="pt-1 pb-1">${product.name}</div>
+                <c:forEach var="orderDetails" items="${inventory.orderDetails}">
+                  <div class="pt-1 pb-1">${orderDetails.product.name}</div>
+                </c:forEach>
+              </td>
+              <td class="text-center">
+                <c:forEach var="orderDetails" items="${inventory.orderDetails}">
+                  <div class="pt-1 pb-1">${orderDetails.quantity}</div>
                 </c:forEach>
               </td>
               <td class="text-center">

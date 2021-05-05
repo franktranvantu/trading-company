@@ -1,15 +1,16 @@
 package com.example.tradingcompany.inventory;
 
 import com.example.tradingcompany.dto.SearchCriteria;
+import com.example.tradingcompany.order.OrderDetails;
+import com.example.tradingcompany.order.OrderType;
+import com.example.tradingcompany.product.Product;
 import com.example.tradingcompany.product.ProductService;
-import com.google.common.collect.Sets;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class InventoryService {
@@ -30,7 +31,30 @@ public class InventoryService {
     InventorySpecification nameSpec = new InventorySpecification(new SearchCriteria("name", ":", name));
     InventorySpecification addressSpec = new InventorySpecification(new SearchCriteria("address", ":", address));
     InventorySpecification productSpec = new InventorySpecification(new SearchCriteria("products", ":", product));
-    return inventoryRepository.findAll(Specification.where(nameSpec).and(addressSpec).and(productSpec));
+    List<Inventory> inventories = inventoryRepository.findAll(Specification.where(nameSpec).and(addressSpec).and(productSpec));
+    inventories.stream().forEach(inventory -> {
+      Map<Product, List<OrderDetails>> orderPerProduct = inventory.getOrderDetails().stream()
+          .collect(Collectors.groupingBy(OrderDetails::getProduct));
+      Set<Map.Entry<Product, List<OrderDetails>>> entries = orderPerProduct.entrySet();
+      Set<OrderDetails> orders = new HashSet<>();
+      for (Map.Entry<Product, List<OrderDetails>> entry : entries) {
+        List<OrderDetails> orderDetails = entry.getValue();
+        int quantity = 0;
+        for (OrderDetails order : orderDetails) {
+          if (order.getType() == OrderType.BUY) {
+            quantity += order.getQuantity();
+          } else {
+            quantity -= order.getQuantity();
+          }
+        }
+        OrderDetails order = new OrderDetails();
+        order.setProduct(entry.getKey());
+        order.setQuantity(quantity);
+        orders.add(order);
+      }
+      inventory.setOrderDetails(orders);
+    });
+    return inventories;
   }
 
   public Inventory getInventoryById(long id) {

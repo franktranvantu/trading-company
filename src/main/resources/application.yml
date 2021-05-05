@@ -1,6 +1,7 @@
 server:
   servlet:
     context-path: /trading-company
+  port: 9000
 
 spring:
   jpa:

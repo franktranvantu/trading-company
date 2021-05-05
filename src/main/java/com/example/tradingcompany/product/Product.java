@@ -1,7 +1,6 @@
 package com.example.tradingcompany.product;
 
 import com.example.tradingcompany.category.Category;
-import com.example.tradingcompany.inventory.Inventory;
 import com.example.tradingcompany.order.OrderDetails;
 import com.example.tradingcompany.provider.Provider;
 import lombok.AllArgsConstructor;
@@ -40,8 +39,6 @@ public class Product {
   private Category category;
   private Double buyingPrice;
   private Double sellingPrice;
-  @ManyToMany(mappedBy = "products")
-  private Set<Inventory> inventories = new HashSet<>();
 
   public Product(String name,
                  String model,

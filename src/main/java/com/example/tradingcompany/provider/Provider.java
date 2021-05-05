@@ -1,5 +1,6 @@
 package com.example.tradingcompany.provider;
 
+import com.example.tradingcompany.order.OrderDetails;
 import com.example.tradingcompany.product.Product;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,6 +28,8 @@ public class Provider {
   private String email;
   @OneToMany(mappedBy = "provider")
   private Set<Product> products = new HashSet<>();
+  @OneToMany(mappedBy = "provider")
+  private Set<OrderDetails> orderDetails = new HashSet<>();
 
   public Provider(String name, String address, String phone, String fax, String email) {
     this.name = name;
