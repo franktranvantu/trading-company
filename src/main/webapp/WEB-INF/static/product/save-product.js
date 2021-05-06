@@ -25,16 +25,15 @@ $(function() {
     }
     brandInput.removeClass('is-invalid');
 
-    const descriptionInput = $('input#description');
-    if (_.isEmpty(descriptionInput.val())) {
-      descriptionInput.addClass('is-invalid');
-      return false;
-    }
-    descriptionInput.removeClass('is-invalid');
-
     const buyInput = $('input#buy');
     if (_.isEmpty(buyInput.val())) {
       buyInput.addClass('is-invalid');
+      $('.buy-mandatory').show();
+      $('.buy-exceed').hide();
+      return false;
+    } else if (buyInput.val() < 1 || buyInput.val() > 5000) {
+      $('.buy-mandatory').hide();
+      $('.buy-exceed').show();
       return false;
     }
     buyInput.removeClass('is-invalid');
@@ -42,6 +41,12 @@ $(function() {
     const saleInput = $('input#sale');
     if (_.isEmpty(saleInput.val())) {
       saleInput.addClass('is-invalid');
+      $('.sale-mandatory').show();
+      $('.sale-exceed').hide();
+      return false;
+    } else if (saleInput.val() < buyInput.val() || saleInput.val() > (buyInput.val() * 2)) {
+      $('.sale-mandatory').hide();
+      $('.sale-exceed').show()
       return false;
     }
     saleInput.removeClass('is-invalid');

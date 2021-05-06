@@ -18,7 +18,7 @@
     <form:form action="${contextPath}/customer/save-customer" method="post" modelAttribute="customer" id="save-customer">
       <form:hidden path="id"/>
       <div class="form-group row">
-        <label for="name" class="col-sm-2 col-form-label">Name</label>
+        <label for="name" class="col-sm-2 col-form-label">Name <span class="text-danger">*</span></label>
         <div class="col-sm-10">
           <form:input path="name" class="form-control" id="name" aria-describedby="name"/>
           <div id="name" class="invalid-feedback">
@@ -27,7 +27,7 @@
         </div>
       </div>
       <div class="form-group row">
-        <label for="address" class="col-sm-2 col-form-label">Address</label>
+        <label for="address" class="col-sm-2 col-form-label">Address <span class="text-danger">*</span></label>
         <div class="col-sm-10">
           <form:input path="address" class="form-control" id="address" aria-describedby="address"/>
           <div id="name" class="invalid-feedback">
@@ -36,7 +36,7 @@
         </div>
       </div>
       <div class="form-group row">
-        <label for="phone" class="col-sm-2 col-form-label">Phone</label>
+        <label for="phone" class="col-sm-2 col-form-label">Phone <span class="text-danger">*</span></label>
         <div class="col-sm-10">
           <form:input path="phone" class="form-control" id="phone" aria-describedby="phone"/>
           <div id="name" class="invalid-feedback">
@@ -48,18 +48,12 @@
         <label for="fax" class="col-sm-2 col-form-label">Fax</label>
         <div class="col-sm-10">
           <form:input path="fax" class="form-control" id="fax" aria-describedby="fax"/>
-          <div id="fax" class="invalid-feedback">
-            Fax is mandatory
-          </div>
         </div>
       </div>
       <div class="form-group row">
         <label for="email" class="col-sm-2 col-form-label">Email</label>
         <div class="col-sm-10">
           <form:input type="email" path="email" class="form-control" id="email" aria-describedby="email"/>
-          <div id="email" class="invalid-feedback">
-            Email is mandatory
-          </div>
         </div>
       </div>
       <div class="form-group row">
