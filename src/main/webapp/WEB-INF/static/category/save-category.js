@@ -1,6 +1,6 @@
 $(function() {
   $('#back').click(() => {
-    window.location.href = '/trading-company/category';
+    window.location.href = '/category';
   });
 
   $('form#save-category').submit(() => {

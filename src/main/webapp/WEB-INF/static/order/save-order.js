@@ -1,6 +1,6 @@
 $(function() {
   $('#back').click(() => {
-    window.location.href = '/trading-company/order';
+    window.location.href = '/order';
   });
 
   $('#type').change(e => {

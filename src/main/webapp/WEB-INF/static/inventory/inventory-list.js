@@ -19,7 +19,7 @@ $(function() {
     const modal = $('#delete-inventory-modal');
     const id = modal.data('id');
     modal.modal('hide');
-    const $form = $('<form action="/trading-company/inventory/delete-inventory" method="POST"></form>');
+    const $form = $('<form action="/inventory/delete-inventory" method="POST"></form>');
     $form.append(`<input type="hidden" name="id" value="${id}">`);
     $(document.body).append($form);
     $($form).submit();

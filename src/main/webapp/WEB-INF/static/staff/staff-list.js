@@ -19,7 +19,7 @@ $(function() {
     const modal = $('#delete-staff-modal');
     const id = modal.data('id');
     modal.modal('hide');
-    const $form = $('<form action="/trading-company/staff/delete-staff" method="POST"></form>');
+    const $form = $('<form action="/staff/delete-staff" method="POST"></form>');
     $form.append(`<input type="hidden" name="id" value="${id}">`);
     $(document.body).append($form);
     $($form).submit();
