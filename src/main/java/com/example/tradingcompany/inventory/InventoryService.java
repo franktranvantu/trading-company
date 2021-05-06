@@ -4,23 +4,25 @@ import com.example.tradingcompany.dto.SearchCriteria;
 import com.example.tradingcompany.order.OrderDetails;
 import com.example.tradingcompany.order.OrderType;
 import com.example.tradingcompany.product.Product;
-import com.example.tradingcompany.product.ProductService;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
 public class InventoryService {
 
   private final InventoryRepository inventoryRepository;
-  private final ProductService productService;
 
-  public InventoryService(InventoryRepository inventoryRepository, ProductService productService) {
+  public InventoryService(InventoryRepository inventoryRepository) {
     this.inventoryRepository = inventoryRepository;
-    this.productService = productService;
   }
 
   public List<Inventory> getAllInventories() {
@@ -30,7 +32,7 @@ public class InventoryService {
   public List<Inventory> getAllInventories(String name, String address, String product) {
     InventorySpecification nameSpec = new InventorySpecification(new SearchCriteria("name", ":", name));
     InventorySpecification addressSpec = new InventorySpecification(new SearchCriteria("address", ":", address));
-    InventorySpecification productSpec = new InventorySpecification(new SearchCriteria("products", ":", product));
+    InventorySpecification productSpec = new InventorySpecification(new SearchCriteria("orderDetails", ":", product));
     List<Inventory> inventories = inventoryRepository.findAll(Specification.where(nameSpec).and(addressSpec).and(productSpec));
     inventories.stream().forEach(inventory -> {
       Map<Product, List<OrderDetails>> orderPerProduct = inventory.getOrderDetails().stream()

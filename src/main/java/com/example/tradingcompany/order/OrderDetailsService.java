@@ -24,7 +24,19 @@ public class OrderDetailsService {
   }
 
   public OrderDetails createOrderDetails(OrderDetails orderDetails) {
-    // TODO: Validate
+    int quantity = 0;
+    List<OrderDetails> orders = orderDetailsRepository.findOrderDetailsByProductAndInventory(orderDetails.getProduct(), orderDetails.getInventory());
+    for (OrderDetails order : orders) {
+      if (order.getType() == OrderType.BUY) {
+        quantity += order.getQuantity();
+      } else {
+        quantity -= order.getQuantity();
+      }
+    }
+    if (orderDetails.getType() == OrderType.SALE && orderDetails.getQuantity() > quantity) {
+      throw new IllegalArgumentException(String.format("Quantity must be maximum %d", quantity));
+    }
+
     return orderDetailsRepository.save(orderDetails);
   }
 

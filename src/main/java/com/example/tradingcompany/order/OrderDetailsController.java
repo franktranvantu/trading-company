@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 @RequestMapping("/order")
@@ -58,10 +59,12 @@ public class OrderDetailsController {
     }
 
     @PostMapping("/save-order")
-    public String createOrderDetails(@ModelAttribute("order") OrderDetails orderDetails, RedirectAttributes ra, Model model) {
+    public String createOrderDetails(@ModelAttribute("order") OrderDetails orderDetails,
+                                     RedirectAttributes ra,
+                                     Model model) {
         ResultDto result = new ResultDto();
         try {
-            model.addAttribute("action", "Create");
+            model.addAttribute("action", Objects.isNull(orderDetails.getId()) ? "Create" : "Update");
             orderDetailsService.createOrderDetails(orderDetails);
             result.setMessage("Created order successful!");
             result.setStatus(ResultStatus.SUCCESS);
@@ -71,6 +74,11 @@ public class OrderDetailsController {
             result.setStatus(ResultStatus.FAIL);
             result.setMessage(e.getMessage());
             model.addAttribute("result", result);
+            model.addAttribute("staffs", staffService.getAllStaffs());
+            model.addAttribute("customers", customerService.getAllCustomers());
+            model.addAttribute("providers", providerService.getAllProviders());
+            model.addAttribute("products", productService.getAllProducts());
+            model.addAttribute("inventories", inventoryService.getAllInventories());
             return "save-order";
         }
     }
