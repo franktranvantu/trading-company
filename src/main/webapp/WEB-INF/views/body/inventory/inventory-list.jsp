@@ -17,7 +17,7 @@
     <div class="card border-0">
       <div class="card-header bg-transparent">
         <div class="mt-2 mb-4 d-flex">
-          <h4 class="card-title mb-0">Search inventory</h4>
+          <h4 class="card-title mb-0">Search inventories</h4>
         </div>
         <form action="${contextPath}/inventory" method="get">
           <div class="row">

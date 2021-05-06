@@ -1,4 +1,19 @@
 $(function() {
+  const start = moment().subtract(30, 'days');
+  const end = moment();
+
+  function cb(start, end) {
+    $('#date').html(start.format('dd/mm/yyyy') + ' - ' + end.format('dd/mm/yyyy'));
+  }
+
+  $('#date').daterangepicker({
+    opens: 'center',
+    startDate: start,
+    endDate: end,
+  }, cb);
+
+  cb(start, end);
+
   $('#order').DataTable({
     scrollY: 450,
     scroller: true

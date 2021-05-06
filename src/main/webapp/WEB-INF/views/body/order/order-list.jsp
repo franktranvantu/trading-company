@@ -17,11 +17,63 @@
 
   <div class="container">
     <div class="card border-0">
-      <div class="card-header bg-transparent d-flex justify-content-between align-items-center">
-        <h4 class="card-title mb-0">All Orders</h4>
-        <a href="${contextPath}/order/create-order" class="btn btn-primary"><i class="fas fa-user-plus"></i> Add new</a>
+      <div class="card-header bg-transparent">
+        <div class="mt-2 mb-4 d-flex">
+          <h4 class="card-title mb-0">Search orders</h4>
+        </div>
+        <form action="${contextPath}/order" method="get">
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="staff" class="form-label">Staff</label>
+                <input type="input" name="staff" class="form-control" id="staff">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="product" class="form-label">Product</label>
+                <input type="input" name="product" class="form-control" id="product">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="provider" class="form-label">Provider</label>
+                <input type="input" name="provider" class="form-control" id="provider">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="customer" class="form-label">Customer</label>
+                <input type="input" name="customer" class="form-control" id="customer">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-3">
+              <div class="form-group">
+                <label for="inventory" class="form-label">Inventory</label>
+                <input type="input" name="inventory" class="form-control" id="inventory">
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="form-group">
+                <label for="date" class="form-label">Date Range</label>
+                <input type="input" name="date" class="form-control" id="date">
+              </div>
+            </div>
+            <div class="col-auto d-flex align-items-end justify-content-end">
+              <div class="form-group">
+                <button type="submit" class="btn btn-success"><i class="fas fa-search"></i> Search</button>
+              </div>
+            </div>
+          </div>
+        </form>
       </div>
       <div class="card-body">
+        <div class="mt-4 mb-4 d-flex justify-content-between align-items-center">
+          <h4 class="card-title mb-0">All Orders</h4>
+          <a href="${contextPath}/order/create-order" class="btn btn-primary"><i class="fas fa-user-plus"></i> Add new</a>
+        </div>
         <table id="order" class="table">
           <thead class="thead-dark">
           <tr class="text-center">
