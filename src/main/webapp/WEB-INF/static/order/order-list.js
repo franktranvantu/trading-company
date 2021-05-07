@@ -3,10 +3,13 @@ $(function() {
   const end = moment();
 
   function cb(start, end) {
-    $('#date').html(start.format('dd/mm/yyyy') + ' - ' + end.format('dd/mm/yyyy'));
+    $('#date').val(start.format('DD/MM/yyyy') + ' - ' + end.format('DD/MM/yyyy'));
   }
 
   $('#date').daterangepicker({
+    locale: {
+      format: 'DD/MM/YYYY'
+    },
     opens: 'center',
     startDate: start,
     endDate: end,
