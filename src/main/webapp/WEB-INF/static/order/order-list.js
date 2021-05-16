@@ -1,21 +1,20 @@
 $(function() {
-  const start = moment().subtract(30, 'days');
-  const end = moment();
-
-  function cb(start, end) {
-    $('#date').val(start.format('DD/MM/yyyy') + ' - ' + end.format('DD/MM/yyyy'));
-  }
-
   $('#date').daterangepicker({
-    locale: {
-      format: 'DD/MM/YYYY'
-    },
     opens: 'center',
-    startDate: start,
-    endDate: end,
-  }, cb);
+    autoUpdateInput: false,
+    locale: {
+      format: 'DD/MM/YYYY',
+      cancelLabel: 'Clear'
+    }
+  });
 
-  cb(start, end);
+  $('#date').on('apply.daterangepicker', function(ev, picker) {
+    $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+  });
+
+  $('#date').on('cancel.daterangepicker', function(ev, picker) {
+    $('#date').val('');
+  });
 
   $('#order').DataTable({
     scrollY: 450,

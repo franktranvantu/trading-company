@@ -3,11 +3,7 @@ package com.example.tradingcompany.inventory;
 import com.example.tradingcompany.dto.SearchCriteria;
 import org.springframework.data.jpa.domain.Specification;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.JoinType;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 import java.util.Objects;
 import java.util.Set;
 
@@ -24,15 +20,11 @@ public class InventorySpecification implements Specification<Inventory> {
     if (Objects.isNull(criteria.getValue())) {
       return null;
     }
-    if (criteria.getOperation().equalsIgnoreCase(":")) {
-      if (root.get(criteria.getKey()).getJavaType() == String.class) {
-        return builder.like(root.get(criteria.getKey()), "%" + criteria.getValue() + "%");
-      } else if (root.get(criteria.getKey()).getJavaType() == Set.class) {
-        query.distinct(true);
-        return builder.like(root.join(criteria.getKey(), JoinType.INNER).get("product").get("name"), "%" + criteria.getValue() + "%");
-      } else {
-        return builder.equal(root.get(criteria.getKey()), criteria.getValue());
-      }
+    if (root.get(criteria.getKey()).getJavaType() == String.class) {
+      return builder.like(builder.lower(root.get(criteria.getKey())), "%" + criteria.getValue().toString().toLowerCase() + "%");
+    } else if (root.get(criteria.getKey()).getJavaType() == Set.class) {
+      query.distinct(true);
+      return builder.like(builder.lower(root.join(criteria.getKey(), JoinType.INNER).get("product").get("name")), "%" + criteria.getValue().toString().toLowerCase() + "%");
     }
     return null;
   }

@@ -30,9 +30,9 @@ public class InventoryService {
   }
 
   public List<Inventory> getAllInventories(String name, String address, String product) {
-    InventorySpecification nameSpec = new InventorySpecification(new SearchCriteria("name", ":", name));
-    InventorySpecification addressSpec = new InventorySpecification(new SearchCriteria("address", ":", address));
-    InventorySpecification productSpec = new InventorySpecification(new SearchCriteria("orderDetails", ":", product));
+    InventorySpecification nameSpec = new InventorySpecification(new SearchCriteria("name", name));
+    InventorySpecification addressSpec = new InventorySpecification(new SearchCriteria("address", address));
+    InventorySpecification productSpec = new InventorySpecification(new SearchCriteria("orderDetails", product));
     List<Inventory> inventories = inventoryRepository.findAll(Specification.where(nameSpec).and(addressSpec).and(productSpec));
     inventories.stream().forEach(inventory -> {
       Map<Product, List<OrderDetails>> orderPerProduct = inventory.getOrderDetails().stream()
