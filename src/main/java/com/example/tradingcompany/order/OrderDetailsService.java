@@ -1,6 +1,12 @@
 package com.example.tradingcompany.order;
 
+import com.example.tradingcompany.customer.Customer;
+import com.example.tradingcompany.dto.DateRange;
+import com.example.tradingcompany.dto.SearchCriteria;
+import com.example.tradingcompany.product.Product;
+import com.example.tradingcompany.staff.Staff;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +23,17 @@ public class OrderDetailsService {
 
   public List<OrderDetails> getAllOrderDetails() {
     return orderDetailsRepository.findAll();
+  }
+
+  public List<OrderDetails> getAllOrderDetails(Customer customer, Staff staff, DateRange dateRange) {
+    RevenueOrderDetailsSpecification customerSpec = new RevenueOrderDetailsSpecification(new SearchCriteria("customer", customer));
+    RevenueOrderDetailsSpecification staffSpec = new RevenueOrderDetailsSpecification(new SearchCriteria("staff", staff));
+    RevenueOrderDetailsSpecification dateRangeSpec = new RevenueOrderDetailsSpecification(new SearchCriteria("dateRange", dateRange));
+    return orderDetailsRepository.findAll(Specification.where(customerSpec).and(staffSpec).and(dateRangeSpec));
+  }
+
+  public List<OrderDetails> getOrderDetailsByProductAndType(Product product, OrderType type) {
+    return orderDetailsRepository.findOrderDetailsByProductAndType(product, type);
   }
 
   public OrderDetails getOrderDetailsById(long id) {

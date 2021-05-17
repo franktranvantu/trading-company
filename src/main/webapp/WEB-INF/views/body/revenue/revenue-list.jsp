@@ -26,11 +26,23 @@
           <div class="row">
             <div class="col-3">
               <div class="form-group">
-                <label for="category" class="form-label">Category</label>
-                <select class="form-control" name="category" id="category">
+                <label for="customer" class="form-label">Customer</label>
+                <select class="form-control" name="customer" id="customer">
                   <option value="">All</option>
-                  <option value="customer">Customer</option>
-                  <option value="staff">Staff</option>
+                  <c:forEach var="customer" items="${customers}">
+                    <option value="${customer.id}" ${customer.id == selectedCustomer.id ? 'selected' : ''}>${customer.name}</option>
+                  </c:forEach>
+                </select>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="form-group">
+                <label for="staff" class="form-label">Staff</label>
+                <select class="form-control" name="staff" id="staff">
+                  <option value="">All</option>
+                  <c:forEach var="staff" items="${staffs}">
+                    <option value="${staff.id}" ${staff.id == selectedStaff.id ? 'selected' : ''}>${staff.name}</option>
+                  </c:forEach>
                 </select>
               </div>
             </div>
