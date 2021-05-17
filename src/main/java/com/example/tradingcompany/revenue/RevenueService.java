@@ -2,6 +2,7 @@ package com.example.tradingcompany.revenue;
 
 import com.example.tradingcompany.customer.Customer;
 import com.example.tradingcompany.dto.DateRange;
+import com.example.tradingcompany.dto.DateTimeRange;
 import com.example.tradingcompany.order.OrderDetails;
 import com.example.tradingcompany.order.OrderDetailsService;
 import com.example.tradingcompany.order.OrderType;
@@ -27,7 +28,7 @@ public class RevenueService {
     this.orderDetailsService = orderDetailsService;
   }
 
-  public List<RevenueItem> getAllRevenueItems(Customer customer, Staff staff, DateRange dateRange) {
+  public List<RevenueItem> getAllRevenueItems(Customer customer, Staff staff, DateTimeRange dateRange) {
     List<RevenueItem> items = new ArrayList<>();
     List<Map.Entry<Product, List<OrderDetails>>> orders = orderDetailsService.getAllOrderDetails(customer, staff, dateRange).stream()
             .collect(Collectors.groupingBy(OrderDetails::getProduct))

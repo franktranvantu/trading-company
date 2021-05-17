@@ -2,6 +2,7 @@ package com.example.tradingcompany.order;
 
 import com.example.tradingcompany.customer.Customer;
 import com.example.tradingcompany.dto.DateRange;
+import com.example.tradingcompany.dto.DateTimeRange;
 import com.example.tradingcompany.dto.SearchCriteria;
 import com.example.tradingcompany.product.Product;
 import com.example.tradingcompany.staff.Staff;
@@ -25,10 +26,10 @@ public class OrderDetailsService {
     return orderDetailsRepository.findAll();
   }
 
-  public List<OrderDetails> getAllOrderDetails(Customer customer, Staff staff, DateRange dateRange) {
+  public List<OrderDetails> getAllOrderDetails(Customer customer, Staff staff, DateTimeRange dateRange) {
     RevenueOrderDetailsSpecification customerSpec = new RevenueOrderDetailsSpecification(new SearchCriteria("customer", customer));
     RevenueOrderDetailsSpecification staffSpec = new RevenueOrderDetailsSpecification(new SearchCriteria("staff", staff));
-    RevenueOrderDetailsSpecification dateRangeSpec = new RevenueOrderDetailsSpecification(new SearchCriteria("dateRange", dateRange));
+    RevenueOrderDetailsSpecification dateRangeSpec = new RevenueOrderDetailsSpecification(new SearchCriteria("dateTime", dateRange));
     return orderDetailsRepository.findAll(Specification.where(customerSpec).and(staffSpec).and(dateRangeSpec));
   }
 

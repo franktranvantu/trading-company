@@ -46,10 +46,14 @@
                 </select>
               </div>
             </div>
-            <div class="col-3">
+            <div class="col-4">
               <div class="form-group">
                 <label for="date" class="form-label">Date Range</label>
-                <input type="input" name="date" class="form-control" id="date">
+                <c:set var="selectedDate" value="" />
+                <c:if test="${not empty date}">
+                  <c:set var="selectedDate"><spring:eval expression="date" /></c:set>
+                </c:if>
+                <input type="input" name="date" class="form-control" id="date" value="${selectedDate}">
               </div>
             </div>
             <div class="col-auto d-flex align-items-end justify-content-end">
