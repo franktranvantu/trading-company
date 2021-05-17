@@ -26,7 +26,7 @@ public class CustomDateTimeRangeFormatter implements Formatter<DateTimeRange> {
     @Override
     public String print(DateTimeRange date, Locale locale) {
         String from = date.getFrom().format(DateTimeFormatter.ofPattern(DATE_FORMAT));
-        String to = date.getFrom().format(DateTimeFormatter.ofPattern(DATE_FORMAT));
+        String to = date.getTo().format(DateTimeFormatter.ofPattern(DATE_FORMAT));
         return String.format("%s - %s", from, to);
     }
 }

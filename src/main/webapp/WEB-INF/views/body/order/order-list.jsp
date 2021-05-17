@@ -26,25 +26,45 @@
             <div class="col">
               <div class="form-group">
                 <label for="staff" class="form-label">Staff</label>
-                <input type="input" name="staff" class="form-control" id="staff">
+                <select class="form-control" name="staff" id="staff">
+                  <option value="">All</option>
+                  <c:forEach var="staff" items="${staffs}">
+                    <option value="${staff.id}" ${staff.id == selectedStaff.id ? 'selected' : ''}>${staff.name}</option>
+                  </c:forEach>
+                </select>
               </div>
             </div>
             <div class="col">
               <div class="form-group">
                 <label for="product" class="form-label">Product</label>
-                <input type="input" name="product" class="form-control" id="product">
+                <select class="form-control" name="product" id="product">
+                  <option value="">All</option>
+                  <c:forEach var="product" items="${products}">
+                    <option value="${product.id}" ${product.id == selectedProduct.id ? 'selected' : ''}>${product.name}</option>
+                  </c:forEach>
+                </select>
               </div>
             </div>
             <div class="col">
               <div class="form-group">
                 <label for="provider" class="form-label">Provider</label>
-                <input type="input" name="provider" class="form-control" id="provider">
+                <select class="form-control" name="provider" id="provider">
+                  <option value="">All</option>
+                  <c:forEach var="provider" items="${providers}">
+                    <option value="${provider.id}" ${provider.id == selectedProvider.id ? 'selected' : ''}>${provider.name}</option>
+                  </c:forEach>
+                </select>
               </div>
             </div>
             <div class="col">
               <div class="form-group">
                 <label for="customer" class="form-label">Customer</label>
-                <input type="input" name="customer" class="form-control" id="customer">
+                <select class="form-control" name="customer" id="customer">
+                  <option value="">All</option>
+                  <c:forEach var="customer" items="${customers}">
+                    <option value="${customer.id}" ${customer.id == selectedCustomer.id ? 'selected' : ''}>${customer.name}</option>
+                  </c:forEach>
+                </select>
               </div>
             </div>
           </div>
@@ -52,13 +72,22 @@
             <div class="col-3">
               <div class="form-group">
                 <label for="inventory" class="form-label">Inventory</label>
-                <input type="input" name="inventory" class="form-control" id="inventory">
+                <select class="form-control" name="inventory" id="inventory">
+                  <option value="">All</option>
+                  <c:forEach var="inventory" items="${inventories}">
+                    <option value="${inventory.id}" ${inventory.id == selectedInventory.id ? 'selected' : ''}>${inventory.name}</option>
+                  </c:forEach>
+                </select>
               </div>
             </div>
-            <div class="col-3">
+            <div class="col-4">
               <div class="form-group">
-                <label for="date" class="form-label">Date Range</label>
-                <input type="input" name="date" class="form-control" id="date">
+                <label for="date" class="form-label">Date Time Range</label>
+                <c:set var="selectedDate" value="" />
+                <c:if test="${not empty date}">
+                  <c:set var="selectedDate"><spring:eval expression="date" /></c:set>
+                </c:if>
+                <input type="input" name="date" class="form-control" id="date" value="${selectedDate}">
               </div>
             </div>
             <div class="col-auto d-flex align-items-end justify-content-end">

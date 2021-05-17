@@ -1,11 +1,17 @@
 package com.example.tradingcompany.order;
 
+import com.example.tradingcompany.customer.Customer;
 import com.example.tradingcompany.customer.CustomerService;
+import com.example.tradingcompany.dto.DateTimeRange;
 import com.example.tradingcompany.dto.ResultDto;
 import com.example.tradingcompany.dto.ResultStatus;
+import com.example.tradingcompany.inventory.Inventory;
 import com.example.tradingcompany.inventory.InventoryService;
+import com.example.tradingcompany.product.Product;
 import com.example.tradingcompany.product.ProductService;
+import com.example.tradingcompany.provider.Provider;
 import com.example.tradingcompany.provider.ProviderService;
+import com.example.tradingcompany.staff.Staff;
 import com.example.tradingcompany.staff.StaffService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,8 +47,25 @@ public class OrderDetailsController {
     }
 
     @GetMapping
-    public String index(Model model) {
-        List<OrderDetails> orders = orderDetailsService.getAllOrderDetails();
+    public String index(@RequestParam(required = false) Staff staff,
+                        @RequestParam(required = false) Product product,
+                        @RequestParam(required = false) Provider provider,
+                        @RequestParam(required = false) Customer customer,
+                        @RequestParam(required = false) Inventory inventory,
+                        @RequestParam(required = false) DateTimeRange date,
+                        Model model) {
+        List<OrderDetails> orders = orderDetailsService.getAllOrderDetails(staff, product, provider, customer, inventory, date);
+        model.addAttribute("staffs", staffService.getAllStaffs());
+        model.addAttribute("selectedStaff", staff);
+        model.addAttribute("products", productService.getAllProducts());
+        model.addAttribute("selectedProduct", product);
+        model.addAttribute("providers", providerService.getAllProviders());
+        model.addAttribute("selectedProvider", provider);
+        model.addAttribute("customers", customerService.getAllCustomers());
+        model.addAttribute("selectedCustomer", customer);
+        model.addAttribute("inventories", inventoryService.getAllInventories());
+        model.addAttribute("selectedInventory", inventory);
+        model.addAttribute("date", date);
         model.addAttribute("orders", orders);
         return "order-list";
     }

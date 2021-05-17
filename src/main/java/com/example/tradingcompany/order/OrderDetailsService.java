@@ -4,7 +4,9 @@ import com.example.tradingcompany.customer.Customer;
 import com.example.tradingcompany.dto.DateRange;
 import com.example.tradingcompany.dto.DateTimeRange;
 import com.example.tradingcompany.dto.SearchCriteria;
+import com.example.tradingcompany.inventory.Inventory;
 import com.example.tradingcompany.product.Product;
+import com.example.tradingcompany.provider.Provider;
 import com.example.tradingcompany.staff.Staff;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.jpa.domain.Specification;
@@ -24,6 +26,21 @@ public class OrderDetailsService {
 
   public List<OrderDetails> getAllOrderDetails() {
     return orderDetailsRepository.findAll();
+  }
+
+  public List<OrderDetails> getAllOrderDetails(Staff staff,
+                                               Product product,
+                                               Provider provider,
+                                               Customer customer,
+                                               Inventory inventory,
+                                               DateTimeRange dateTimeRange) {
+    RevenueOrderDetailsSpecification staffSpec = new RevenueOrderDetailsSpecification(new SearchCriteria("staff", staff));
+    RevenueOrderDetailsSpecification productSpec = new RevenueOrderDetailsSpecification(new SearchCriteria("product", product));
+    RevenueOrderDetailsSpecification providerSpec = new RevenueOrderDetailsSpecification(new SearchCriteria("provider", provider));
+    RevenueOrderDetailsSpecification customerSpec = new RevenueOrderDetailsSpecification(new SearchCriteria("customer", customer));
+    RevenueOrderDetailsSpecification inventorySpec = new RevenueOrderDetailsSpecification(new SearchCriteria("inventory", inventory));
+    RevenueOrderDetailsSpecification dateRangeSpec = new RevenueOrderDetailsSpecification(new SearchCriteria("dateTime", dateTimeRange));
+    return orderDetailsRepository.findAll(Specification.where(staffSpec).and(productSpec).and(providerSpec).and(customerSpec).and(inventorySpec).and(dateRangeSpec));
   }
 
   public List<OrderDetails> getAllOrderDetails(Customer customer, Staff staff, DateTimeRange dateRange) {
