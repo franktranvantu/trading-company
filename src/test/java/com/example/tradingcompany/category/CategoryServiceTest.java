@@ -4,20 +4,19 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @ExtendWith(MockitoExtension.class)
-@ExtendWith(SpringExtension.class)
 public class CategoryServiceTest {
 
-    @MockBean
+    @Mock
     private CategoryRepository categoryRepository;
 
     @InjectMocks
@@ -30,6 +29,28 @@ public class CategoryServiceTest {
                 .limit(15)
                 .collect(Collectors.toList());
         Mockito.when(categoryRepository.findAll()).thenReturn(categories);
-        Assertions.assertEquals(categoryService.getAllCategories().size(), 15);
+        Assertions.assertEquals(categoryService.getAllCategories(), categories);
+    }
+
+    @Test
+    public void getByIdTest() {
+        Category category = new Category(1L, "Category", null);
+        Mockito.when(categoryRepository.findById(1L)).thenReturn(Optional.of(category));
+        Assertions.assertEquals(categoryService.getCategoryById(1L), category);
+    }
+
+    @Test
+    public void createTest() {
+        Category category = new Category(1L, "Category", null);
+        Mockito.when(categoryRepository.save(category)).thenReturn(category);
+        Assertions.assertEquals(categoryService.createCategory(category), category);
+    }
+
+    @Test
+    public void updateTest() {
+        Category category = new Category(1L, "Category", null);
+        Mockito.when(categoryRepository.findById(1L)).thenReturn(Optional.of(category));
+        Mockito.when(categoryRepository.save(category)).thenReturn(category);
+        Assertions.assertEquals(categoryService.updateCategory(1L, category), category);
     }
 }
