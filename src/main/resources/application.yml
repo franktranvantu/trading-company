@@ -2,10 +2,12 @@ server:
   port: 9000
 
 spring:
+  profiles:
+    active: mysql
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
   mvc:
     view:
       prefix: /WEB-INF/views/
@@ -13,8 +15,3 @@ spring:
   web:
     resources:
       static-locations: /WEB-INF/static
-  h2:
-    console:
-      enabled: true
-  datasource:
-     url: jdbc:h2:mem:testdb
